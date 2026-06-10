@@ -25,7 +25,13 @@ html, body { height: 100%; }
 
 body {
   font-family: 'LeMano', 'DM Sans', sans-serif;
-  background: var(--room);
+  background-color: var(--room);
+  background-image:
+    linear-gradient(rgba(4,4,12,0.72), rgba(4,4,12,0.72)),
+    url('./mansionbg.png');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
   color: var(--parchment);
   min-height: 100vh;
   overflow-x: hidden;
