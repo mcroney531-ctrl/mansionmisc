@@ -1142,6 +1142,17 @@ body.reveal-mode .phrase { cursor: default; }
 }
 .hiw-nav-btn.primary:hover:not(:disabled) { background: #6a4f99; border-color: #6a4f99; color: white; }
 
+
+/* ── TITLE SCENE BACKGROUND ── */
+#scene-title {
+  background-image:
+    linear-gradient(rgba(4,4,12,0.55), rgba(4,4,12,0.55)),
+    url('./exterior.png');
+  background-size: cover;
+  background-position: center center;
+  min-height: 100vh;
+}
+
 </style>
 </head>
 <body>
@@ -1168,7 +1179,7 @@ body.reveal-mode .phrase { cursor: default; }
 </div>
 
 <!-- ════════ SCENE 0: TITLE ════════ -->
-<div class="scene active" id="scene-title">
+<div class="scene active" id="scene-title" style="background-image: linear-gradient(rgba(4,4,12,0.55), rgba(4,4,12,0.55)), url('./exterior.png'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh;">
   <div class="title-card">
     <div class="title-eyebrow">A Facilitation Encounter</div>
     <h1 class="title-main">Mansion of<br>Misconceptions</h1>
