@@ -715,9 +715,332 @@ body.reveal-mode .phrase { cursor: default; }
   margin-bottom: 22px;
 }
 
+
+/* ══ DOOR TRANSITION ══ */
+.door-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+  display: flex;
+}
+.door-panel {
+  flex: 1;
+  background: #0d0a06;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 18px,
+      rgba(101,67,33,0.15) 18px,
+      rgba(101,67,33,0.15) 20px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      transparent,
+      transparent 40px,
+      rgba(101,67,33,0.08) 40px,
+      rgba(101,67,33,0.08) 42px
+    );
+  transition: transform 1.1s cubic-bezier(0.76, 0, 0.24, 1);
+  position: relative;
+}
+.door-panel.left { transform-origin: left center; border-right: 3px solid #3d2b1a; }
+.door-panel.right { transform-origin: right center; border-left: 3px solid #3d2b1a; }
+.door-panel.left::after {
+  content: '';
+  position: absolute;
+  right: 14px; top: 50%;
+  transform: translateY(-50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #c8a84b, #8b6914);
+  box-shadow: 0 0 8px rgba(200,168,75,0.6);
+}
+.door-panel.right::before {
+  content: '';
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #c8a84b, #8b6914);
+  box-shadow: 0 0 8px rgba(200,168,75,0.6);
+}
+.door-overlay.opening .door-panel.left  { transform: translateX(-100%); }
+.door-overlay.opening .door-panel.right { transform: translateX(100%); }
+.door-overlay.gone { display: none; }
+
+/* creak text */
+.door-creak {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 501;
+  font-family: 'Creepster', cursive;
+  font-size: 28px;
+  color: var(--torch);
+  text-shadow: 0 0 20px rgba(245,197,24,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  letter-spacing: 3px;
+}
+.door-creak.visible { opacity: 1; }
+
+/* ══ SETUP PAGE ══ */
+.setup-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 36px 34px;
+  max-width: 680px;
+  width: 100%;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.45);
+  color: #1a1a28;
+}
+.setup-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ghost-purple);
+  margin-bottom: 6px;
+  font-family: 'DM Sans', sans-serif;
+}
+.setup-title {
+  font-family: 'Creepster', cursive;
+  font-size: 38px;
+  color: #0d0a18;
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+.setup-subtitle {
+  font-size: 14px;
+  color: #555570;
+  margin-bottom: 28px;
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+}
+.setup-divider {
+  border: none;
+  border-top: 1.5px solid #e8e8f0;
+  margin: 24px 0;
+}
+.setup-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ghost-purple);
+  margin-bottom: 12px;
+  font-family: 'DM Sans', sans-serif;
+}
+.setup-prose {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: #2a2a3a;
+  margin-bottom: 16px;
+  font-family: 'DM Sans', sans-serif;
+}
+.setup-prose strong { color: #0d0a18; }
+
+/* context pills */
+.setup-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.setup-pill {
+  background: #f4f3ff;
+  border: 1.5px solid #d4d0f5;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: #3a3a5a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.setup-pill-icon { font-size: 16px; }
+.setup-pill strong { color: #1a1a2e; display: block; font-size: 12px; margin-bottom: 2px; }
+.setup-pill span { color: #6666880; font-size: 12px; }
+
+/* illustrated demo */
+.demo-frame {
+  background: #f8f8fc;
+  border: 1.5px solid #e0e0f0;
+  border-radius: 14px;
+  padding: 22px 20px;
+  margin-bottom: 22px;
+}
+.demo-frame-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9090b0;
+  margin-bottom: 14px;
+  font-family: 'DM Sans', sans-serif;
+}
+.demo-slide-mini {
+  background: white;
+  border: 4px solid #26263e;
+  border-bottom-width: 8px;
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  font-family: 'HollowThriller', Georgia, serif;
+  position: relative;
+}
+.demo-slide-mini-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #16161f;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+.demo-slide-mini-bullets {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.demo-slide-mini-bullets li {
+  font-size: 12px;
+  color: #2a2a35;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  line-height: 1.4;
+}
+.demo-slide-mini-bullets li::before { content: '▸'; color: #aaa; flex-shrink: 0; font-size: 10px; margin-top: 2px; }
+/* the fake marked phrase in demo */
+.demo-phrase-marked {
+  background: rgba(245,197,24,0.22);
+  box-shadow: 0 0 0 2px rgba(245,197,24,0.7);
+  border-radius: 4px;
+  padding: 1px 3px;
+  position: relative;
+  cursor: default;
+}
+.demo-phrase-marked::after {
+  content: '🔦';
+  position: absolute;
+  top: -14px;
+  right: -8px;
+  font-size: 11px;
+}
+.demo-phrase-revealed-red {
+  background: rgba(204,41,54,0.14);
+  box-shadow: 0 0 0 2px #cc2936;
+  border-radius: 4px;
+  padding: 1px 3px;
+}
+.demo-phrase-revealed-green {
+  background: rgba(45,158,68,0.14);
+  box-shadow: 0 0 0 2px #2d9e44;
+  border-radius: 4px;
+  padding: 1px 3px;
+}
+
+/* step annotations */
+.demo-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.demo-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: 'DM Sans', sans-serif;
+}
+.demo-step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ghost-purple);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.demo-step-text {
+  font-size: 13px;
+  color: #3a3a5a;
+  line-height: 1.6;
+}
+.demo-step-text strong { color: #0d0a18; }
+.demo-modal-mini {
+  background: #1a1a2e;
+  border: 1.5px solid var(--ghost-purple);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 6px 0 0 36px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Sans', sans-serif;
+}
+.demo-modal-mini-ghost { font-size: 20px; }
+.demo-modal-mini-text {
+  font-family: 'Creepster', cursive;
+  font-size: 18px;
+  color: var(--torch);
+}
+.demo-modal-mini-sub {
+  font-size: 11px;
+  color: #8888aa;
+  margin-top: 2px;
+}
+.demo-textarea-mini {
+  background: #10101e;
+  border: 1.5px solid #34345a;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 6px 0 0 36px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #7070a0;
+  font-style: italic;
+  width: calc(100% - 36px);
+}
+.demo-reveal-mini {
+  background: #f4f3ff;
+  border: 1px solid #d4d0f5;
+  border-left: 4px solid #2d9e44;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 6px 0 0 36px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #3a3a5a;
+  line-height: 1.5;
+}
+.demo-reveal-mini.missed {
+  border-left-color: #cc2936;
+}
+
 </style>
 </head>
 <body>
+
+
+<!-- ══ DOOR OVERLAY ══ -->
+<div class="door-overlay gone" id="doorOverlay">
+  <div class="door-panel left"></div>
+  <div class="door-panel right"></div>
+</div>
+<div class="door-creak" id="doorCreak">...</div>
 
 <div id="flashlight"></div>
 <div class="fog"></div>
@@ -737,7 +1060,102 @@ body.reveal-mode .phrase { cursor: default; }
     <h1 class="title-main">Mansion of<br>Misconceptions</h1>
     <p class="title-sub">Something is haunting your workshop.<br><strong>It looks exactly like real information.</strong></p>
     <p class="title-context">You're facilitating a session on workshop dynamics. Two learners are presenting their research. One of their slides has something hiding in it — confident, polished, and not entirely real. Shine your light carefully.</p>
-    <button class="btn btn-torch" onclick="goToScene('scene-brief')">🔦 &nbsp;Enter the Mansion</button>
+    <button class="btn btn-torch" onclick="goToScene('scene-setup')">🔦 &nbsp;Enter the Mansion</button>
+  </div>
+</div>
+
+<!-- ════════ SCENE 0b: SETUP ════════ -->
+<div class="scene" id="scene-setup">
+  <div class="setup-card">
+    <div class="setup-eyebrow">Before You Enter</div>
+    <h2 class="setup-title">You Are the Facilitator</h2>
+    <p class="setup-subtitle">A professional development session is underway. Two learners are presenting research. Something in this room may not be what it seems.</p>
+
+    <hr class="setup-divider">
+    <div class="setup-section-label">The Situation</div>
+    <p class="setup-prose">Your organization is running a PD session on <strong>personality frameworks and participant dynamics in workshop settings</strong> — specifically, how to manage difficult moments when learners disengage or push back.</p>
+    <p class="setup-prose">Two learners — <strong>Lynn</strong> and <strong>Russ</strong> — have been tasked with presenting short research summaries. Both used AI tools in their preparation. What they did with those tools is where the story diverges.</p>
+    <p class="setup-prose">Your job isn't to grade them. It's to <strong>navigate the room in real time</strong> — reading what's on their slides, deciding what to trust, and responding as a facilitator who knows that <strong>not everything confident-sounding is accurate.</strong></p>
+
+    <hr class="setup-divider">
+    <div class="setup-section-label">The Session</div>
+    <div class="setup-pills">
+      <div class="setup-pill">
+        <span class="setup-pill-icon">📋</span>
+        <div><strong>Topic</strong>Personality Frameworks &amp; Workshop Dynamics</div>
+      </div>
+      <div class="setup-pill">
+        <span class="setup-pill-icon">👥</span>
+        <div><strong>Format</strong>Learner-led research presentations</div>
+      </div>
+      <div class="setup-pill">
+        <span class="setup-pill-icon">🎯</span>
+        <div><strong>Your Role</strong>Facilitator — evaluate, respond, navigate</div>
+      </div>
+      <div class="setup-pill">
+        <span class="setup-pill-icon">⚠️</span>
+        <div><strong>The Wrinkle</strong>AI was involved. Verification may not have been.</div>
+      </div>
+    </div>
+
+    <hr class="setup-divider">
+    <div class="setup-section-label">How It Works — A Quick Demo</div>
+    <p class="setup-prose" style="margin-bottom:16px">Each learner's slide will appear on screen. <strong>Click any phrase you think might be a hallucination</strong> — AI-generated content presented as fact without verification. Here's what the flow looks like:</p>
+
+    <div class="demo-frame">
+      <div class="demo-frame-label">Sample Slide — Click to Mark Suspicious Phrases</div>
+      <div class="demo-slide-mini">
+        <div class="demo-slide-mini-title">Effective Adult Learning Strategies</div>
+        <ul class="demo-slide-mini-bullets">
+          <li>Adults retain information best through <span class="demo-phrase-marked">spaced repetition intervals of exactly 72 hours</span></li>
+          <li>Learner engagement increases when content connects to prior experience</li>
+          <li><span class="demo-phrase-revealed-red">Studies confirm adults learn 4× faster when using visual-only formats</span> <span style="font-size:10px;color:#cc2936;font-family:'DM Sans',sans-serif;margin-left:4px">← missed this one</span></li>
+        </ul>
+      </div>
+
+      <div class="demo-steps">
+        <div class="demo-step">
+          <div class="demo-step-num">1</div>
+          <div class="demo-step-text"><strong>Click a phrase</strong> that seems suspicious — too specific, unsourced, or just confident in a way that raises a flag. It highlights with your flashlight.</div>
+        </div>
+        <div class="demo-modal-mini">
+          <span class="demo-modal-mini-ghost">👻</span>
+          <div>
+            <div class="demo-modal-mini-text">Are You Sure?</div>
+            <div class="demo-modal-mini-sub">Once you lock in, the mansion reveals what was really on that slide.</div>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="demo-step-num">2</div>
+          <div class="demo-step-text">When you're done marking, <strong>Lock In Your Marks.</strong> The mansion asks: <em>Are you sure?</em> This is your last chance to reconsider.</div>
+        </div>
+        <div class="demo-step">
+          <div class="demo-step-num">3</div>
+          <div class="demo-step-text">For each phrase you marked, answer: <strong>"How do you know?"</strong> There's no wrong answer — the question is the practice.</div>
+        </div>
+        <div class="demo-textarea-mini">What raised your suspicion? A missing source? A stat that's too precise? A claim that's too convenient?</div>
+        <div class="demo-step">
+          <div class="demo-step-num">4</div>
+          <div class="demo-step-text">The <strong>reveal</strong> shows what was actually on the slide. Caught hallucinations turn green. Missed ones surface in red. Clean phrases stay clean.</div>
+        </div>
+        <div class="demo-reveal-mini">
+          ✅ <strong>Caught.</strong> "Exactly 72 hours" has no basis in spaced repetition research — the science describes ranges, not a single interval. Precise numbers with no source are a hallucination signal.
+        </div>
+        <div class="demo-reveal-mini missed" style="margin-top:6px">
+          👻 <strong>It got through.</strong> "4× faster with visual-only formats" — no such finding exists at that scale. Visual learning is real; the multiplier is fabricated.
+        </div>
+        <div class="demo-step" style="margin-top:4px">
+          <div class="demo-step-num" style="background:#f5c518;color:#1a1405">!</div>
+          <div class="demo-step-text"><strong>Marking nothing is also an answer.</strong> If you believe a slide is clean, lock it in untouched. Sometimes the right call is recognizing there's nothing to catch.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center">
+      <button class="btn btn-torch" onclick="enterMansion()" style="font-size:16px;padding:18px 44px">
+        🚪 &nbsp;Enter the Mansion
+      </button>
+    </div>
   </div>
 </div>
 
@@ -1163,6 +1581,41 @@ document.addEventListener('touchmove', e => {
     document.documentElement.style.setProperty('--my', e.touches[0].clientY + 'px');
   }
 }, { passive: true });
+
+/* ════════════════════════════════
+   DOOR TRANSITION
+════════════════════════════════ */
+function enterMansion() {
+  const overlay = document.getElementById('doorOverlay');
+  const creak   = document.getElementById('doorCreak');
+
+  // Reset door to closed
+  overlay.classList.remove('gone', 'opening');
+  overlay.style.display = 'flex';
+
+  // Show creak text briefly
+  creak.textContent = '...';
+  creak.classList.add('visible');
+
+  setTimeout(() => {
+    creak.textContent = 'creak...';
+  }, 300);
+
+  // Open the doors after short pause
+  setTimeout(() => {
+    overlay.classList.add('opening');
+    creak.classList.remove('visible');
+    // Switch scene mid-animation
+    setTimeout(() => {
+      goToScene('scene-brief');
+      // Hide overlay after animation completes
+      setTimeout(() => {
+        overlay.classList.add('gone');
+      }, 600);
+    }, 500);
+  }, 700);
+}
+
 </script>
 </body>
 </html>
