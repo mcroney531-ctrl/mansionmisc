@@ -185,30 +185,32 @@ body.lights-on #flashlight { opacity: 0; }
 .projector-wrap {
   width: 100%;
   display: flex;
-  align-items: flex-end;
-  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
   margin-bottom: 22px;
 }
 
 /* presenter */
 .presenter {
   flex-shrink: 0;
-  width: 110px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 14px;
 }
 .presenter-avatar {
-  width: 110px;
-  height: 140px;
+  width: 150px;
+  height: 190px;
   border-radius: 0;
   border: none;
   background: transparent;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  filter: drop-shadow(0 0 12px rgba(123,94,167,0.3));
+  filter: drop-shadow(0 0 16px rgba(123,94,167,0.4));
 }
 .presenter-avatar img {
   width: 100%;
@@ -217,29 +219,30 @@ body.lights-on #flashlight { opacity: 0; }
   border-radius: 0;
 }
 .presenter-name {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--text-dim);
   text-align: center;
+  align-self: center;
 }
 
 /* the slide itself */
 .slide-screen {
-  flex: 1;
+  width: 100%;
+  max-width: 580px;
   background: #f7f5f0;
-  border-radius: 6px;
-  border: 10px solid #26263e;
-  border-bottom-width: 22px;
+  border-radius: 5px;
+  border: 7px solid #26263e;
+  border-bottom-width: 14px;
   box-shadow:
-    0 0 0 1.5px #34345a,
-    0 18px 50px rgba(0,0,0,0.6),
-    0 0 60px rgba(245,197,24,0.05);
-  padding: 26px 30px 30px;
+    0 0 0 1px #34345a,
+    0 12px 36px rgba(0,0,0,0.6),
+    0 0 40px rgba(245,197,24,0.05);
   color: #1d1d28;
   position: relative;
-  min-height: 250px;
+  min-height: 200px;
 }
 .slide-screen::after {
   /* projector light beam hint */
@@ -621,7 +624,8 @@ body.reveal-mode .phrase { cursor: default; }
 .slide-screen-inner {
   position: relative;
   z-index: 2;
-  padding: 22px 28px 26px 200px; /* push content right of the icon column */
+  padding: 16px 10px 18px 150px;
+  max-width: 65%;
 }
 .slide-ppt-kicker {
   font-family: 'HollowThriller', Georgia, serif;
@@ -634,7 +638,7 @@ body.reveal-mode .phrase { cursor: default; }
 }
 .slide-ppt-title {
   font-family: 'HollowThriller', Georgia, serif;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   color: #16161f;
   margin-bottom: 14px;
@@ -652,7 +656,7 @@ body.reveal-mode .phrase { cursor: default; }
 }
 .slide-ppt-bullets li {
   font-family: 'HollowThriller', Georgia, serif;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1.55;
   color: #2a2a35;
   display: flex;
