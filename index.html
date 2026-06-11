@@ -1363,8 +1363,8 @@ body.reveal-mode .phrase { cursor: default; }
 const MICROCOPY = {
   a1: {
     halluc: true,
-    caught: '<strong>Caught.</strong> The "3× more likely" stat doesn\'t exist in any published research. It\'s a classic AI hallucination shape: a precise number attached to a vague claim. Precision creates false credibility.',
-    missed: '<strong>It got through.</strong> "Research indicates" + a specific multiplier = instant credibility. But no study produced this number. ChatGPT generated a plausible-sounding statistic — exactly what it\'s designed to do.'
+    caught: `<strong>Caught.</strong> The "3× more likely" stat doesn\'t exist in any published research. It\'s a classic AI hallucination shape: a precise number attached to a vague claim. Precision creates false credibility.`,
+    missed: `<strong>It got through.</strong> "Research indicates" + a specific multiplier = instant credibility. But no study produced this number. ChatGPT generated a plausible-sounding statistic — exactly what it\'s designed to do.`
   },
   a2: {
     halluc: true,
@@ -1379,7 +1379,7 @@ const MICROCOPY = {
   a4: {
     halluc: true,
     caught: '<strong>Caught.</strong> "Experts recommend grouping by type" — this is pigeonholing dressed as best practice. The MBTI framework itself warns against using type to sort or restrict people. No expert consensus recommends this.',
-    missed: '<strong>It got through.</strong> This one\'s dangerous because it\'s actionable — a facilitator could walk out and actually do this. Type-based grouping is explicitly discouraged by the framework\'s own publishers.'
+    missed: `<strong>It got through.</strong> This one\'s dangerous because it\'s actionable — a facilitator could walk out and actually do this. Type-based grouping is explicitly discouraged by the framework\'s own publishers.`
   },
   b1: {
     halluc: false,
@@ -1393,7 +1393,7 @@ const MICROCOPY = {
   },
   b3: {
     halluc: false,
-    falseAlarm: '<strong>False alarm.</strong> This is the responsible version of the claim — frameworks as conversation starters, not prediction tools. It\'s measured, sourced, and verifiable. Some slides are clean.',
+    falseAlarm: `<strong>False alarm.</strong> This is the responsible version of the claim — frameworks as conversation starters, not prediction tools. It\'s measured, sourced, and verifiable. Some slides are clean.`,
     clean: ''
   }
 };
@@ -1692,7 +1692,7 @@ function enterMansion() {
 ════════════════════════════════ */
 const HIW_STEPS = [
   {
-    eyebrow: 'Step 1 of 5',
+    eyebrow: 'Step 1 of 6',
     title: "What You're Looking For",
     body: `
       <p>Each learner's slide will appear on screen. Your job is to read it the way a facilitator would — carefully, critically, with an eye for anything that sounds <strong>too specific, too clean, or too convenient.</strong></p>
@@ -1701,7 +1701,7 @@ const HIW_STEPS = [
     `
   },
   {
-    eyebrow: 'Step 2 of 5',
+    eyebrow: 'Step 2 of 6',
     title: 'Mark It',
     body: `
       <p><strong>Click any phrase</strong> on the slide that raises a flag. It highlights with your flashlight — a signal that you've put your attention on it. Click it again to unmark it.</p>
@@ -1713,7 +1713,26 @@ const HIW_STEPS = [
     `
   },
   {
-    eyebrow: 'Step 3 of 5',
+    eyebrow: 'Step 3 of 6 — Try It',
+    title: 'Your Turn',
+    body: `
+      <p style="margin-bottom:14px">Here's a statement from a recent workshop presentation. <strong>Click the phrase that doesn't hold up.</strong></p>
+      <div id="hiwPracticeSlide" style="background:#f8f7f4;border:4px solid #26263e;border-bottom-width:8px;border-radius:4px;padding:14px 18px;font-family:'HollowThriller',Georgia,serif;margin-bottom:14px;">
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8a8694;margin-bottom:8px;font-family:'DM Sans',sans-serif;font-weight:700;">Workshop Research — Session Notes</div>
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;">
+          <li style="font-size:13px;color:#2a2a35;display:flex;align-items:flex-start;gap:6px;"><span style="color:#aaa;font-size:10px;margin-top:3px;">▸</span>Adult learners respond well to content connected to real experience</li>
+          <li style="font-size:13px;color:#2a2a35;display:flex;align-items:flex-start;gap:6px;"><span style="color:#aaa;font-size:10px;margin-top:3px;">▸</span><span id="hiwPracticePhrase" style="cursor:pointer;border-radius:3px;padding:1px 3px;transition:background 0.18s;" onclick="hiwPracticeClick()">Visual learners don't actually retain information from text-based content</span></li>
+          <li style="font-size:13px;color:#2a2a35;display:flex;align-items:flex-start;gap:6px;"><span style="color:#aaa;font-size:10px;margin-top:3px;">▸</span>Spaced practice improves long-term recall across most learner types</li>
+        </ul>
+      </div>
+      <div style="text-align:center;margin-top:12px;">
+        <p id="hiwPracticeHint" style="font-size:12px;color:#9090b0;font-family:'DM Sans',sans-serif;font-style:italic;margin-bottom:10px;">Click the phrase that shouldn't be trusted as-is</p>
+        <button id="hiwLockBtn" class="btn btn-torch" style="opacity:0.35;cursor:not-allowed;font-size:13px;padding:10px 24px;" disabled onclick="hiwPracticeLock()">Lock In My Mark</button>
+      </div>
+    `
+  },
+  {
+    eyebrow: 'Step 4 of 6',
     title: 'Are You Sure?',
     body: `
       <p>When you've marked everything you want to flag, hit <strong>Lock In My Marks.</strong> Before the reveal, the mansion has one question.</p>
@@ -1728,7 +1747,7 @@ const HIW_STEPS = [
     `
   },
   {
-    eyebrow: 'Step 4 of 5',
+    eyebrow: 'Step 5 of 6',
     title: 'How Do You Know?',
     body: `
       <p>For each phrase you marked, you'll be asked one question: <strong style="color:#0d0a18">"How do you know?"</strong></p>
@@ -1737,7 +1756,7 @@ const HIW_STEPS = [
     `
   },
   {
-    eyebrow: 'Step 5 of 5',
+    eyebrow: 'Step 6 of 6',
     title: 'The Reveal',
     body: `
       <p>The slide comes back with everything surfaced. Phrases you caught correctly turn <strong style="color:#2d9e44">green</strong>. Hallucinations you missed surface in <strong style="color:#cc2936">red</strong>. False alarms get a quiet note.</p>
@@ -1806,6 +1825,69 @@ document.addEventListener('click', (e) => {
     }
   }
 });
+
+
+function hiwPracticeClick() {
+  const phrase  = document.getElementById('hiwPracticePhrase');
+  const hint    = document.getElementById('hiwPracticeHint');
+  const lockBtn = document.getElementById('hiwLockBtn');
+  if (!phrase) return;
+
+  // Highlight the phrase
+  phrase.style.background = 'rgba(245,197,24,0.22)';
+  phrase.style.boxShadow  = '0 0 0 2px rgba(245,197,24,0.7)';
+  phrase.style.cursor     = 'default';
+  phrase.onclick          = null;
+
+  // Update hint
+  if (hint) {
+    hint.textContent   = 'Good — now lock it in.';
+    hint.style.color   = 'var(--text-mid, #b8b8cc)';
+    hint.style.fontStyle = 'normal';
+  }
+
+  // Enable lock button
+  if (lockBtn) {
+    lockBtn.disabled       = false;
+    lockBtn.style.opacity  = '1';
+    lockBtn.style.cursor   = 'pointer';
+  }
+}
+
+function hiwPracticeLock() {
+  const phrase  = document.getElementById('hiwPracticePhrase');
+  const hint    = document.getElementById('hiwPracticeHint');
+  const lockBtn = document.getElementById('hiwLockBtn');
+
+  // Disable lock button
+  if (lockBtn) {
+    lockBtn.disabled      = true;
+    lockBtn.style.opacity = '0.4';
+    lockBtn.textContent   = 'Locked In ✓';
+  }
+
+  // Green reveal
+  if (phrase) {
+    phrase.style.background = 'rgba(45,158,68,0.18)';
+    phrase.style.boxShadow  = '0 0 0 2px #2d9e44';
+  }
+
+  // Feedback message
+  if (hint) {
+    hint.innerHTML     = `✅ <strong>Caught.</strong> The "visual learners" myth has been widely debunked — learning styles research doesn't support restricting content by type. Advancing...`;
+    hint.style.color   = '#2d9e44';
+    hint.style.fontWeight = '600';
+    hint.style.fontStyle  = 'normal';
+  }
+
+  // Auto-advance after they see the green
+  setTimeout(() => {
+    if (hiwCurrent < HIW_STEPS.length - 1) {
+      hiwCurrent++;
+      renderHiwStep();
+    }
+  }, 1800);
+}
 
 </script>
 
