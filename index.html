@@ -1004,6 +1004,7 @@ body.reveal-mode .phrase { cursor: default; }
   border-radius: 18px;
   width: 92vw;
   max-width: 520px;
+  max-height: 88vh;
   box-shadow: 0 24px 70px rgba(0,0,0,0.45);
   transform: scale(0.94) translateY(16px);
   transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
@@ -1057,7 +1058,7 @@ body.reveal-mode .phrase { cursor: default; }
 .hiw-body {
   padding: 26px 26px 20px;
   flex: 1;
-  min-height: 260px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
@@ -1114,21 +1115,23 @@ body.reveal-mode .phrase { cursor: default; }
 }
 .hiw-nav-btns { display: flex; gap: 8px; }
 .hiw-nav-btn {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 9px;
-  border: 1.5px solid #e0e0f0;
-  background: white;
-  font-size: 18px;
-  color: #3a3a5a;
+  border: 2px solid #1a1a2e;
+  background: #1a1a2e;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.18s;
   line-height: 1;
+  flex-shrink: 0;
 }
-.hiw-nav-btn:hover:not(:disabled) { border-color: var(--ghost-purple); color: var(--ghost-purple); }
+.hiw-nav-btn:hover:not(:disabled) { background: #2a2a4e; border-color: #2a2a4e; color: white; }
 .hiw-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 .hiw-nav-btn.primary {
   background: var(--ghost-purple);
@@ -1152,6 +1155,10 @@ body.reveal-mode .phrase { cursor: default; }
   background-position: center center;
   min-height: 100vh;
 }
+
+
+.hiw-decoy-phrase:hover { background: rgba(245,197,24,0.1); }
+#hiwPracticePhrase:hover { background: rgba(245,197,24,0.1); }
 
 </style>
 </head>
@@ -1200,15 +1207,14 @@ body.reveal-mode .phrase { cursor: default; }
     <div class="setup-section-label">The Situation</div>
     <p class="setup-prose">AI hallucinations are outputs that sound completely real — specific, confident, well-formatted — but have no factual basis. They don't announce themselves. They don't flicker or glitch. They walk right through the wall like they belong there, wearing the clothes of credible information.</p>
     <p class="setup-prose">AI-assisted work has become a normal part of how people research, write, prepare, and present. For many educators and L&D professionals, this is actually how AI first shows up in their world — not as a new platform to learn or a policy to navigate, but as content. Someone else's content, already prepared, already in front of an audience. AI fluency begins with recognizing that moment for what it is. What matters then is what happens next — whether the output gets a second look before it gets passed along. Hallucinations thrive in that gap between what the AI said and what anyone stopped to verify.</p>
-    <hr class="setup-divider">
-    <div class="setup-section-label">Your Scenario</div>
-    <p class="setup-prose">Your organization is running a PD session on <strong>personality frameworks and participant dynamics in workshop settings</strong> — specifically, how to manage difficult moments when learners disengage or push back. Two learners, <strong>Lynn</strong> and <strong>Russ</strong>, have each prepared a short research presentation.</p>
+    <div style="background:#f4f3ff;border:1.5px solid #d4d0f5;border-left:4px solid var(--ghost-purple);border-radius:12px;padding:20px 22px;margin:22px 0;">
+    <div class="setup-section-label" style="margin-bottom:10px;">Your Scenario</div>
+    <p class="setup-prose" style="margin-bottom:0">Your organization is running a PD session on <strong>personality frameworks and participant dynamics in workshop settings</strong> — specifically, how to manage difficult moments when learners disengage or push back. Two learners, <strong>Lynn</strong> and <strong>Russ</strong>, have each prepared a short research presentation.</p>
     <p class="setup-prose">Both used AI in their process. That's where the story diverges. One leaned on it as a source. The other used it as a starting point and went further. As the facilitator, you won't be told which is which — <strong>your job is to read the room, evaluate what's on the slide, and respond.</strong></p>
     <p class="setup-prose">You're not grading their presentations. You're practicing the habit of pausing before you accept what confident-sounding information puts in front of you — <strong>because in a live session, what gets through shapes what your learners walk away believing.</strong></p>
+    </div>
 
-
-
-    <div style="text-align:center">
+    <div style="text-align:center;margin-top:22px;">
       <button class="btn btn-torch" onclick="openHowItWorks()" style="font-size:16px;padding:18px 44px">
         📖 &nbsp;Begin Tutorial
       </button>
@@ -1220,7 +1226,7 @@ body.reveal-mode .phrase { cursor: default; }
 <div class="scene" id="scene-path1">
   <div class="narrative">
     <div class="narrative-label">In the Room</div>
-    Lynn just wrapped her section on managing difficult workshop moments. She closed with a stat that made several heads nod. <strong>"It tracks with my experience,"</strong> she added, <span class="gpt-joke">"but I was glad ChatGPT confirmed it."</span> The room laughed. Her slide is still on the screen.
+    Lynn just wrapped her section on managing difficult workshop moments. She closed with a stat that drew some nods — and at least one raised eyebrow from across the table. <strong>"I pulled this together with some AI help,"</strong> she mentioned offhand, moving on before anyone could follow up. Her slide is still on the screen.
   </div>
 
   <div class="projector-wrap">
@@ -1261,12 +1267,12 @@ body.reveal-mode .phrase { cursor: default; }
     <div class="debrief-icon">🕯️</div>
     <h2 class="debrief-title">One Room Cleared</h2>
     <div class="debrief-body">
-      <p style="margin-bottom:14px">Notice what just happened. The slide <strong>looked professional</strong>. The claim was specific. The room was nodding. And the source — when it finally surfaced — was a chatbot's confident answer, validated by nothing but the presenter's own experience.</p>
-      <p style="margin-bottom:14px">That's the anatomy of a hallucination in the wild: <strong>it doesn't look wrong. It looks exactly like everything else.</strong></p>
-      <p>One more learner is waiting to present. Fair warning — not everything in this mansion is a ghost.</p>
+      <p style="margin-bottom:14px">Notice what just happened. The slide <strong>looked professional</strong>. The claim was specific. Some heads nodded — and someone raised an eyebrow.</p>
+      <p style="margin-bottom:14px">That eyebrow belongs to your room now. Whatever Lynn put on that screen, it lands in your session. How you respond — or don't — is what your participants will take with them. That's the weight of facilitation in an AI-assisted world: <strong>you don't always know where the content came from, but you're still the one standing at the front of the room.</strong></p>
+      <p>One more presenter is waiting. Fair warning — not everything in this mansion is a ghost.</p>
     </div>
     <div id="recapA"></div>
-    <button class="btn btn-torch" style="margin-top:20px" onclick="goToScene('scene-path2')">Meet Learner B</button>
+    <button class="btn btn-torch" style="margin-top:20px" onclick="goToScene('scene-path2')">Continue</button>
   </div>
 </div>
 
@@ -1274,7 +1280,7 @@ body.reveal-mode .phrase { cursor: default; }
 <div class="scene" id="scene-path2">
   <div class="narrative">
     <div class="narrative-label">In the Room</div>
-    Russ presents next. His delivery is unhurried. <strong>"I used Gemini to help me organize my research,"</strong> he mentions, <strong>"and it pointed me to the CPP Global Human Capital Report — so I pulled up the actual report to see what it really says."</strong> His slide goes up.
+    Russ presents next. His delivery is unhurried. <strong>"When I was brainstorming search terms with Gemini, it pointed me to the CPP Global Human Capital Report,"</strong> he mentions, <strong>"so I pulled up the actual report to see what it really says."</strong> His slide goes up.
   </div>
 
   <div class="projector-wrap">
@@ -1315,7 +1321,7 @@ body.reveal-mode .phrase { cursor: default; }
     <h2 class="debrief-title">The Light Stays On</h2>
     <div class="debrief-body">
       <p style="margin-bottom:14px">Two learners. Both used AI. Both mentioned it casually. <strong>Only one treated it as the source.</strong></p>
-      <p style="margin-bottom:14px">Learner A let a confident answer become a fact — her own experience felt like confirmation, and the AI felt like proof. Two feelings, zero verification. Learner B used AI the way you'd use a knowledgeable colleague: <strong>it pointed him somewhere, and he went there himself.</strong></p>
+      <p style="margin-bottom:14px">Lynn let a confident answer become a fact — her own experience felt like confirmation, and the AI felt like proof. Two feelings, zero verification. Russ used AI the way you'd use a knowledgeable colleague: <strong>it pointed him somewhere, and he went there himself.</strong></p>
       <p style="margin-bottom:14px">The skill you practiced here was never "spot the lie." Sometimes the slide is clean. The skill is the <strong>pause</strong> — the willingness to ask "how do you know?" of any claim, any tool, and yourself. Especially when it already tracks with your experience.</p>
     </div>
     <div class="debrief-reflection">
@@ -1398,7 +1404,7 @@ const MICROCOPY = {
   }
 };
 
-const CLEAN_SLIDE_MICRO = '<strong>This slide is clean.</strong> Learner B\'s claims are measured, hedged where the research hedges, and traced to a primary source he actually opened. You went hunting and found nothing — and recognizing clean work is as important as catching a ghost. The absence of a hallucination IS the finding.';
+const CLEAN_SLIDE_MICRO = '<strong>This slide is clean.</strong> Russ\'s claims are measured, hedged where the research hedges, and traced to a primary source he actually opened. You went hunting and found nothing — and recognizing clean work is as important as catching a ghost. The absence of a hallucination IS the finding.';
 
 /* ════════════════════════════════
    STATE
@@ -1704,12 +1710,13 @@ const HIW_STEPS = [
     eyebrow: 'Step 2 of 6',
     title: 'Mark It',
     body: `
-      <p><strong>Click any phrase</strong> on the slide that raises a flag. It highlights with your flashlight — a signal that you've put your attention on it. Click it again to unmark it.</p>
-      <div style="margin:14px 0;background:#f8f8fc;border-radius:10px;padding:14px 16px;font-family:'HollowThriller',Georgia,serif;font-size:13px;color:#2a2a35;">
+      <p>🖱️ <strong>Click any phrase</strong> on the slide that raises a flag. It highlights with your flashlight — a signal that you've put your attention on it. Click it again to unmark it.</p>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#9090b0;font-family:'DM Sans',sans-serif;margin-bottom:6px;">An Example</div>
+      <div style="margin:0 0 14px;background:#f8f8fc;border:4px solid #26263e;border-bottom-width:8px;border-radius:4px;box-shadow:0 0 0 1.5px #34345a,0 8px 24px rgba(0,0,0,0.3);padding:14px 16px;font-family:'HollowThriller',Georgia,serif;font-size:13px;color:#2a2a35;">
         <div style="font-size:11px;color:#9090b0;font-family:'DM Sans',sans-serif;margin-bottom:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">On the slide</div>
         ▸ Research indicates INFJ types are <span style="background:rgba(245,197,24,0.22);box-shadow:0 0 0 2px rgba(245,197,24,0.7);border-radius:4px;padding:1px 3px;position:relative;">3× more likely to disengage 🔦</span> in high-conflict environments
       </div>
-      <p style="margin-top:4px"><strong>Marking nothing is also valid.</strong> If you believe a slide is clean, lock it in untouched — recognizing trustworthy work is part of the skill.</p>
+      <p style="margin-top:4px">✅ <strong>Marking nothing is also valid.</strong> If you believe a slide is clean, lock it in untouched — recognizing trustworthy work is part of the skill.</p>
     `
   },
   {
@@ -1717,12 +1724,13 @@ const HIW_STEPS = [
     title: 'Your Turn',
     body: `
       <p style="margin-bottom:14px">Here's a statement from a recent workshop presentation. <strong>Click the phrase that doesn't hold up.</strong></p>
-      <div id="hiwPracticeSlide" style="background:#f8f7f4;border:4px solid #26263e;border-bottom-width:8px;border-radius:4px;padding:14px 18px;font-family:'HollowThriller',Georgia,serif;margin-bottom:14px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#9090b0;font-family:'DM Sans',sans-serif;margin-bottom:6px;">An Example</div>
+      <div id="hiwPracticeSlide" style="background:#f8f7f4;border:4px solid #26263e;border-bottom-width:8px;border-radius:4px;padding:14px 18px;font-family:'HollowThriller',Georgia,serif;margin-bottom:14px;box-shadow:0 0 0 1.5px #34345a,0 8px 24px rgba(0,0,0,0.3);">
         <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8a8694;margin-bottom:8px;font-family:'DM Sans',sans-serif;font-weight:700;">Workshop Research — Session Notes</div>
         <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;">
-          <li style="font-size:13px;color:#2a2a35;display:flex;align-items:flex-start;gap:6px;"><span style="color:#aaa;font-size:10px;margin-top:3px;">▸</span>Adult learners respond well to content connected to real experience</li>
+          <li style="font-size:13px;color:#2a2a35;display:flex;align-items:flex-start;gap:6px;"><span style="color:#aaa;font-size:10px;margin-top:3px;">▸</span><span class="hiw-decoy-phrase" style="cursor:pointer;border-radius:3px;padding:1px 3px;transition:background 0.18s;" onclick="hiwDecoyClick(this)">Adult learners respond well to content connected to real experience</span></li>
           <li style="font-size:13px;color:#2a2a35;display:flex;align-items:flex-start;gap:6px;"><span style="color:#aaa;font-size:10px;margin-top:3px;">▸</span><span id="hiwPracticePhrase" style="cursor:pointer;border-radius:3px;padding:1px 3px;transition:background 0.18s;" onclick="hiwPracticeClick()">Visual learners don't actually retain information from text-based content</span></li>
-          <li style="font-size:13px;color:#2a2a35;display:flex;align-items:flex-start;gap:6px;"><span style="color:#aaa;font-size:10px;margin-top:3px;">▸</span>Spaced practice improves long-term recall across most learner types</li>
+          <li style="font-size:13px;color:#2a2a35;display:flex;align-items:flex-start;gap:6px;"><span style="color:#aaa;font-size:10px;margin-top:3px;">▸</span><span class="hiw-decoy-phrase" style="cursor:pointer;border-radius:3px;padding:1px 3px;transition:background 0.18s;" onclick="hiwDecoyClick(this)">Spaced practice improves long-term recall across most learner types</span></li>
         </ul>
       </div>
       <div style="text-align:center;margin-top:12px;">
@@ -1735,7 +1743,7 @@ const HIW_STEPS = [
     eyebrow: 'Step 4 of 6',
     title: 'Are You Sure?',
     body: `
-      <p>When you've marked everything you want to flag, hit <strong>Lock In My Marks.</strong> Before the reveal, the mansion has one question.</p>
+      <p>Once you've clicked <strong>Lock In My Marks</strong>, the mansion has one question before the reveal.</p>
       <div class="demo-modal-mini" style="margin:14px 0;">
         <span class="demo-modal-mini-ghost">👻</span>
         <div>
@@ -1762,7 +1770,7 @@ const HIW_STEPS = [
       <p>The slide comes back with everything surfaced. Phrases you caught correctly turn <strong style="color:#2d9e44">green</strong>. Hallucinations you missed surface in <strong style="color:#cc2936">red</strong>. False alarms get a quiet note.</p>
       <div class="demo-reveal-mini" style="margin:12px 0;">✅ <strong>Caught.</strong> "Exactly 72 hours" has no basis in spaced repetition research — the science describes ranges, not a single interval.</div>
       <div class="demo-reveal-mini missed" style="margin:8px 0;">👻 <strong>It got through.</strong> "4× faster with visual-only formats" — no such finding exists at that scale. The multiplier is fabricated.</div>
-      <p style="margin-top:10px">If Learner B's slide is clean — you'll know. The reveal will confirm it. <strong>Recognizing trustworthy work is as important as catching a ghost.</strong></p>
+      <p style="margin-top:10px">If there are no hallucinations on the slide, you'll know. The reveal will confirm it. <strong>Recognizing trustworthy work is as important as catching a ghost.</strong></p>
     `
   }
 ];
@@ -1855,38 +1863,24 @@ function hiwPracticeClick() {
 }
 
 function hiwPracticeLock() {
-  const phrase  = document.getElementById('hiwPracticePhrase');
-  const hint    = document.getElementById('hiwPracticeHint');
-  const lockBtn = document.getElementById('hiwLockBtn');
-
-  // Disable lock button
-  if (lockBtn) {
-    lockBtn.disabled      = true;
-    lockBtn.style.opacity = '0.4';
-    lockBtn.textContent   = 'Locked In ✓';
+  if (hiwCurrent < HIW_STEPS.length - 1) {
+    hiwCurrent++;
+    renderHiwStep();
   }
+}
 
-  // Green reveal
-  if (phrase) {
-    phrase.style.background = 'rgba(45,158,68,0.18)';
-    phrase.style.boxShadow  = '0 0 0 2px #2d9e44';
+
+function hiwDecoyClick(el) {
+  // Toggle mark on decoy phrases — visual feedback, no lock-in consequence
+  if (el.dataset.marked === 'true') {
+    el.style.background = '';
+    el.style.boxShadow  = '';
+    el.dataset.marked   = 'false';
+  } else {
+    el.style.background = 'rgba(245,197,24,0.22)';
+    el.style.boxShadow  = '0 0 0 2px rgba(245,197,24,0.7)';
+    el.dataset.marked   = 'true';
   }
-
-  // Feedback message
-  if (hint) {
-    hint.innerHTML     = `✅ <strong>Caught.</strong> The "visual learners" myth has been widely debunked — learning styles research doesn't support restricting content by type. Advancing...`;
-    hint.style.color   = '#2d9e44';
-    hint.style.fontWeight = '600';
-    hint.style.fontStyle  = 'normal';
-  }
-
-  // Auto-advance after they see the green
-  setTimeout(() => {
-    if (hiwCurrent < HIW_STEPS.length - 1) {
-      hiwCurrent++;
-      renderHiwStep();
-    }
-  }, 1800);
 }
 
 </script>
@@ -1909,8 +1903,8 @@ function hiwPracticeLock() {
     <div class="hiw-footer">
       <div class="hiw-step-counter" id="hiwCounter">1 / 5</div>
       <div class="hiw-nav-btns">
-        <button class="hiw-nav-btn" id="hiwPrev" disabled>‹</button>
-        <button class="hiw-nav-btn" id="hiwNext">›</button>
+        <button class="hiw-nav-btn" id="hiwPrev" disabled>&#8592;</button>
+        <button class="hiw-nav-btn" id="hiwNext">&#8594;</button>
       </div>
     </div>
     <div style="padding: 0 22px 18px;">
