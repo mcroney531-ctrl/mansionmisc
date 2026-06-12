@@ -25,6 +25,7 @@ html, body { height: 100%; }
 
 body {
   font-family: 'LeMano', 'DM Sans', sans-serif;
+  overflow-x: hidden;
   background-color: var(--room);
   background-image:
     linear-gradient(rgba(4,4,12,0.72), rgba(4,4,12,0.72)),
@@ -74,6 +75,7 @@ body.lights-on #flashlight { opacity: 0; }
 /* ── SCREENS / SCENES ── */
 .scene {
   display: none;
+  visibility: hidden;
   min-height: 100vh;
   flex-direction: column;
   align-items: center;
@@ -84,7 +86,7 @@ body.lights-on #flashlight { opacity: 0; }
   max-width: 880px;
   margin: 0 auto;
 }
-.scene.active { display: flex; }
+.scene.active { display: flex; visibility: visible; }
 
 /* ── TITLE SCREEN ── */
 .title-card { text-align: center; max-width: 620px; }
@@ -437,7 +439,7 @@ body.reveal-mode .phrase { cursor: default; }
   line-height: 1.65;
   margin-bottom: 24px;
 }
-.sure-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.sure-actions { display: flex; flex-direction: column; gap: 10px; align-items: center; }
 
 /* ── HOW DO YOU KNOW ── */
 .hdyk-modal {
@@ -1248,7 +1250,6 @@ body.reveal-mode .phrase { cursor: default; }
       </div>
     </div>
   </div>
-  </div>
 
   <div class="microcopy-zone" id="microA"></div>
 
@@ -1301,7 +1302,6 @@ body.reveal-mode .phrase { cursor: default; }
       </div>
     </div>
   </div>
-  </div>
 
   <div class="microcopy-zone" id="microB"></div>
 
@@ -1342,8 +1342,8 @@ body.reveal-mode .phrase { cursor: default; }
     <div class="sure-title">Are You Sure?</div>
     <div class="sure-sub" id="sureSub">You've marked your suspicions. Once you lock in, the mansion reveals what was really on that slide.</div>
     <div class="sure-actions">
-      <button class="btn btn-ghost-outline" onclick="closeSure()">Let Me Look Again</button>
-      <button class="btn btn-torch" onclick="confirmSure()">I'm Sure</button>
+      <button class="btn btn-torch" onclick="confirmSure()" style="width:100%">I'm Sure</button>
+      <button class="btn btn-ghost-outline" onclick="closeSure()" style="width:100%">Let Me Look Again</button>
     </div>
   </div>
 </div>
@@ -1710,7 +1710,7 @@ const HIW_STEPS = [
     eyebrow: 'Step 2 of 6',
     title: 'Mark It',
     body: `
-      <p>🖱️ <strong>Click any phrase</strong> on the slide that raises a flag. It highlights with your flashlight — a signal that you've put your attention on it. Click it again to unmark it.</p>
+      <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAEAUlEQVR4nI2VXWwUZRSGnzMz20XA2pZQXf6KhtRAo1BAmoCJeCHRBL3QtPITEDGpIgZaxWhIyLCJ0WgNFSEEagyCQGFXfqJcKAQJxgtMCALSVgoNGOSnWaBAW2B2Zr7jxS6lQGl9r05mvjzfOe+8831wRwLA4p15vFf/UtfT6kQBi+qTlCdsQHjOdUCFPmR1Va4rlCdsfD9AdBlVW8cDYMKpoB6JcoO73+ZAPADRvsBOVxWPm2zVwaL6TzFmOfAKoXkMrJ8QUSCgOjELtffz1WsXMp33vInVNdaC+uF8sL0QgK9n7sZ23gcV0h3fsHrmNhZvGkd1Yi/GTENCD+3dDofypEWSENs8D/Zcqn5IkTbLqK04BSB1+ABq7P6I1LByxh4Aanu34u5dqxMPodZ4+nmNRJuvcX30JEJrOmdOfy4/ftSuAJWHItRN9HvHdpfr3vmQH28YlLFnw+uxLw/rI0t3n2R+3TxABKA8YfdlRRaWXVS1dQrVyX10RmcJQOeNcNiAaPDyhLJRo5+asN6pTvyqc1Y/K8mKUEQU13Xum/oOWAUEro7MxehCVFewasaqzFsxfhA4EdvyJxUND198ZsrU4cVjftOFm77VWTVFEo8HgGYzfpfknjoTncrKiNTV+Tpv7aulEydvHzt0SHjD8+xoxAkFsc62d8rRk01XrqRaazh2bCUHa292WZmNrdMNrLiuRWOJEGu4L5uWCH4Q2gAjcgeEQ8ZPLDiZuvRZU/6gme2lpS7xubt68DireNyQrAh78gxARBARbvmBnU57+vjgQiaXlj1dWFS8k6ptB1m8pQxVwXUt50GQnqQotljc8tP6y5+HvHQQHLAs6zpKG04/C7/zUUQUV+V/gy2RELBCYyS3f38TKxzitBz9o4bNVfvuWxwX0ydYgRzbMXuO/xUpKiigOBbDDwIZN/IJ+9zFc2vzK9eNzY/lB40X2pRYZUhcDNzr8b0KQ6K2TXMqFTnf0rz++D+nT3lG1BgjDzt2UFJcMuqCsRc2xSvSxM7rbWjf4GgkvJr29VBzU7N89/b89iuXvmi8eFH65UTDm2nPfnLwIJNXGFuqs1fEdPnysPvf+0CwAgzIzWlubZWO9va3VFVG/Xt049+nGo5c9dKObVvqgI4rHpPHwIJPLBGlsUR6B5eUZHIcaqjXUmtYM/t3KpKRlp9Xeem2S0uOnDlNjuOo5/v2iNyB4dBhRW/om+vKJFkR4mrvLmT7znRw+8ApT9gC8O7GHS98f1bnbm8N5u+67E3bcl5ZsGG1ALj7nV6tyEgUVLK3B4xpUKMqdLR9ePjE8VuBYl/uvJHT0HICDHsBaEz1eW31rNsHzjvrF+Ut29MZXbKjgTlrpt81GfAfVqu7jsy1tEMAAAAASUVORK5CYII=" style="width:20px;height:20px;vertical-align:middle;margin-right:4px;"> <strong>Click any phrase</strong> on the slide that raises a flag. It highlights with your flashlight — a signal that you've put your attention on it. Click it again to unmark it.</p>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#9090b0;font-family:'DM Sans',sans-serif;margin-bottom:6px;">An Example</div>
       <div style="margin:0 0 14px;background:#f8f8fc;border:4px solid #26263e;border-bottom-width:8px;border-radius:4px;box-shadow:0 0 0 1.5px #34345a,0 8px 24px rgba(0,0,0,0.3);padding:14px 16px;font-family:'HollowThriller',Georgia,serif;font-size:13px;color:#2a2a35;">
         <div style="font-size:11px;color:#9090b0;font-family:'DM Sans',sans-serif;margin-bottom:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">On the slide</div>
